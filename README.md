@@ -2,6 +2,11 @@
 
 This repository contains the source code for the Real Estate MGI project.
 
+## 4.New Feature: Slide Hero and Categories
+
+- Added slide-hero feature to showcase important information or images.
+- Implemented categories feature to categorize items or content.
+
 ## 3.New Feature: Login Page and Redux Integration
 
 - Implemented a login page for registered users.
