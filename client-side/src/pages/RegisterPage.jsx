@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
 import "../styles/Register.scss";
 
 const RegisterPage = () => {
@@ -25,47 +25,55 @@ const RegisterPage = () => {
   };
   // *************************
 
-  // const [passwordMatch, setPasswordMatch] = useState(true)
+  // Comparing password --> backend
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  useEffect(() => {
+    setPasswordMatch(
+      formData.password === formData.confirmPassword ||
+        formData.confirmPassword === ""
+    );
+  },[formData.password, formData.confirmPassword]);
+  // ****************************
 
-  // useEffect(() => {
-  //   setPasswordMatch(formData.password === formData.confirmPassword || formData.confirmPassword === "")
-  // })
+  const navigate = useNavigate(); //Reroute to login page
 
-  // const navigate = useNavigate()
+  // This will be sending data to the backend
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
+    try {
+      const register_form = new FormData(); //Because we have a file thats why we use register_form
 
-  //   try {
-  //     const register_form = new FormData()
+      for (var key in formData) {
+        register_form.append(key, formData[key]); //Checks each value with its key and sending the form to the backend
+      }
 
-  //     for (var key in formData) {
-  //       register_form.append(key, formData[key])
-  //     }
+      // Sending the form to the backend
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        body: register_form,
+      });
 
-  //     const response = await fetch("http://localhost:3001/auth/register", {
-  //       method: "POST",
-  //       body: register_form
-  //     })
-
-  //     if (response.ok) {
-  //       navigate("/login")
-  //     }
-  //   } catch (err) {
-  //     console.log("Registration failed", err.message)
-  //   }
-  // }
-
-  // *******************************************
+      if (response.ok) {
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log("Registration failed", err.message);
+    }
+  };
+  // ***********************************
 
   // Console data to browser console This can later be commented out in PRODUCTION MODE
   console.log(formData);
-  // ****************************
+  // *********************************************************************************
+
+
   // PAGE VIEW CODES
   return (
     <div className="register">
       <div className="register_content">
-        <form className="register_content_form">
+        {/* The hendleSubmit function sends data to the backend */}
+        <form className="register_content_form" onSubmit={handleSubmit}>
           <input
             placeholder="First Name"
             name="firstName"
@@ -104,9 +112,12 @@ const RegisterPage = () => {
             type="password"
             required
           />
-          {/* {!passwordMatch && (
+
+          {/* Once the password is not correct THEN Disable the Register Button*/}
+          {!passwordMatch && (
             <p style={{ color: "red" }}>Passwords are not matched!</p>
-          )} */}
+          )}
+          {/* ******************************** *********************************/}
 
           <input
             id="image"
@@ -118,7 +129,7 @@ const RegisterPage = () => {
             required
           />
           <label htmlFor="image">
-            <img src="/assets/addImage.png" alt="add profile photo" />
+            <img src="/assets/addImage.png" alt="add profile pic" />
             <p>Upload Your Photo</p>
           </label>
 
@@ -126,12 +137,14 @@ const RegisterPage = () => {
           {formData.profileImage && (
             <img
               src={URL.createObjectURL(formData.profileImage)}
-              alt="profile photo"
+              alt="profile pic"
               style={{ maxWidth: "80px" }}
             />
           )}
           {/* ************************************************************************ */}
-          <button type="submit">REGISTER</button>
+          <button type="submit" disabled={!passwordMatch}>
+            REGISTER
+          </button>
         </form>
         <a href="/login">Already have an account? Log In Here</a>
       </div>
