@@ -2,12 +2,17 @@
 
 This repository contains the source code for the Real Estate MGI project.
 
-## New Feature: Backend User Registration
+## 3.New Feature: Login Page and Redux Integration
+
+- Implemented a login page for registered users.
+- Integrated Redux Toolkit for state management.
+
+## 2.New Feature: Backend User Registration
 
 - Implemented backend routes and models for user registration.
 - Connected backend to MongoDB for storing user information.
 
-## New Feature: Register Page
+## 1. New Feature: Register Page
 
 - Added a register page to allow users to create accounts.
 - Installed server dependencies required for development.
