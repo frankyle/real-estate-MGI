@@ -2,6 +2,12 @@
 
 This repository contains the source code for the Real Estate MGI project.
 
+## 7.New Feature: Estate Details and Booking
+
+- Added functionality for users to view details of selected estates.
+- Users can view all available pictures and details posted by the host.
+- Implemented booking functionality, allowing users to select dates for booking.
+
 ## 6.New Feature: Home Page Listing and Card View
 
 - Added listing of categories on the home page: When a new user enters the home page, they will see all the categories available to select.
