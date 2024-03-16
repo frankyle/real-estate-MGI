@@ -2,7 +2,6 @@ const router = require("express").Router();
 const multer = require("multer");
 
 const Listing = require("../models/Listing");
-const User = require("../models/User")
 
 /* Configuration Multer for File Upload */
 const storage = multer.diskStorage({
@@ -20,6 +19,7 @@ const upload = multer({ storage });
 router.post("/create", upload.array("listingPhotos"), async (req, res) => {
   try {
     /* Take the information from the form */
+    // creator === user.id
     const {
       creator,
       category,
@@ -47,8 +47,10 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
       return res.status(400).send("No file uploaded.")
     }
 
+    // We will map through the listing first
     const listingPhotoPaths = listingPhotos.map((file) => file.path)
 
+    // Then create a new listing
     const newListing = new Listing({
       creator,
       category,
@@ -82,14 +84,15 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
 
 /* GET lISTINGS BY CATEGORY */
 router.get("/", async (req, res) => {
+  // requesting all the categories
   const qCategory = req.query.category
 
   try {
     let listings
     if (qCategory) {
-      listings = await Listing.find({ category: qCategory }).populate("creator")
+      listings = await Listing.find({ category: qCategory }).populate("creator") // creator === user.id
     } else {
-      listings = await Listing.find().populate("creator")
+      listings = await Listing.find().populate("creator") // creator === user.id
     }
 
     res.status(200).json(listings)

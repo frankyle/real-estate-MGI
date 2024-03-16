@@ -34,13 +34,13 @@ const Navbar = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <IconButton disabled={search === ""}>
-          <Search
-            sx={{ color: variables.pinkred }}
-            onClick={() => {
-              navigate(`/properties/search/${search}`);
-            }}
-          />
+        <IconButton
+          disabled={search === ""}
+          onClick={() => {
+            navigate(`/properties/search/${search}`);
+          }}
+        >
+          <Search sx={{ color: variables.pinkred }} />
         </IconButton>
       </div>
 
@@ -71,20 +71,20 @@ const Navbar = () => {
                 "public",
                 ""
               )}`}
-              alt="profile photo"
+              alt="profile pic"
               style={{ objectFit: "cover", borderRadius: "50%" }}
             />
           )}
         </button>
 
-{/* Dropdown before login / No user */}
+        {/* Dropdown before login / No user */}
         {dropdownMenu && !user && (
           <div className="navbar_right_accountmenu">
             <Link to="/login">Log In</Link>
             <Link to="/register">Sign Up</Link>
           </div>
         )}
-{/* Dropdown After login /  user login */}
+        {/* Dropdown After login /  user login */}
 
         {dropdownMenu && user && (
           <div className="navbar_right_accountmenu">
