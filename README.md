@@ -2,6 +2,11 @@
 
 This repository contains the source code for the Real Estate MGI project.
 
+## 6.New Feature: Home Page Listing and Card View
+
+- Added listing of categories on the home page: When a new user enters the home page, they will see all the categories available to select.
+- Implemented card view of all estates: Users can see a card view of all the estates added by hosts. The cards include navigation arrows allowing users to navigate left and right.
+
 ## 5.New Feature: CreatingList Page
 
 - Implemented CreatingList page which can be accessed from the "Become a Host" link at the top of the navigation bar.

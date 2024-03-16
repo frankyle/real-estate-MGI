@@ -1,8 +1,10 @@
-import React from 'react'
+import "../styles/Loader.scss"
 
-function Loader() {
+const Loader = () => {
   return (
-    <div>Loader</div>
+    <div className='loader'>
+      <div className='loader-inner'></div>
+    </div>
   )
 }
 
