@@ -2,6 +2,12 @@
 
 This repository contains the source code for the Real Estate MGI project.
 
+## 8.New Feature: User Lists and Navigation
+
+- Added functionality for users to view their trip list, wish list, and reservation list in separate pages.
+- Users can add properties to their wish list by clicking the like button, and remove them by clicking again.
+- Users can navigate to the property list page from the main page.
+
 ## 7.New Feature: Estate Details and Booking
 
 - Added functionality for users to view details of selected estates.
